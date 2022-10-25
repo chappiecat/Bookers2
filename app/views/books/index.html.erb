@@ -1,0 +1,134 @@
+
+
+<body>
+
+<head>
+  <title>Bookers</title>
+</head>
+
+<header>
+  <nav class= "navbar navbar-expand-lg navbar-dark bg-dark
+">
+    <% if user_signed_in? %>
+    <li>
+      <%= link_to 'Home', new_book_path %>
+    </li>
+
+    <li>
+      <%= link_to 'Users', user_path(current_user.id) %>
+    </li>
+
+    <li>
+      <%= link_to 'Books', user_path(current_user.id) %>
+    </li>
+
+    <li>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+    </li>
+
+  <% else %>
+    <li>
+      <%= link_to "Sign up", new_user_registration_path %>
+    </li>
+    <li>
+      <%= link_to "Log in", new_user_session_path %>
+    </li>
+  <% end %>
+    </nav>
+</header>
+
+
+
+<div class= "container">
+  <div class= "row">
+    <div class= "col-md-3">
+
+  <h1>User info</h1>
+  <div>
+
+    <%= image_tag @user.get_profile_image(100,100) %>
+  </div>
+
+  <table class="table">
+    <tbody>
+    <tr>
+      <td>Name</td>
+        <td><%= @user.name %></td>
+        </tr>
+        <tr>
+      <td>Introduction</td>
+      <td><%= @user.introduction %></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <%= link_to edit_user_path(current_user) do %>edit
+  <% end %>
+
+
+
+
+<h1>New book</h1>
+
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <% end %>
+
+<h4>Title</h4>
+<%= form_with model: @book do |f| %>
+  <label for="inputTitle">Title</label><br>
+  <%= f.text_field :title, autofocus: true, id:"inputTitle", placeholder:"Title"%><br>
+
+  <h4>Opinion</h4>
+  <label for="inputOpinion">Opinion</label><br>
+  <%= f.text_field :opinion, autofocus: true, id:"inputOpinion", placeholder:"Opinion"%><br>
+
+  <%= f.submit 'Create Book' %>
+<% end %>
+</div>
+
+
+
+
+<div class= "col-md-8">
+
+<h1>Books</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th></th>
+    </tr>
+    </thead>
+
+  <tbody>
+
+    <% @books.each do |book| %>
+    <tr>
+      <td><%= link_to book_path(book.id) do %>
+    <%= image_tag book.user.get_profile_image(100, 100) %>
+  <% end %>
+      </td>
+      
+      <td>
+      <%= link_to book_path(book.id) do %>
+      <%= book.title %>
+      <% end %>
+      </td>
+      
+      <td><%= book.opinion %></td>
+    </tr>
+<% end %>
+
+  </tbody>
+
+</table>
+</div>
+  </body>

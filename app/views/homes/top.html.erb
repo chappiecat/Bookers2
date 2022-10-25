@@ -1,0 +1,32 @@
+<html class="fontawesome-i2svg fontawesome-i2svg-complete">
+<head>
+  <title>Bookers</title>
+  </head>
+
+
+<h1>welcome to bookers!!</h1>
+
+<p>you can share and exchange your opinions ,</p><br>
+<p>inpressions , and emotions</p><br>
+<p>about various books!</p>
+
+<header>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to "Rog out", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "Sign up", new_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "Rog in", new_user_session_path %>
+      </li>
+    <% end %>
+  </header>
+
+
+<body>
+
+  <%= yield %>
+</body>
