@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 2022_10_24_081815) do
   end
 
   create_table "books", force: :cascade do |t|
+    t.integer "user_id"
     t.string "title"
-    t.string "opinion"
+    t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
   create_table "favorites", force: :cascade do |t|

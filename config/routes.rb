@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'books/new'
   get 'books/index'
   get 'books/show'
   get 'books/edit'
@@ -12,5 +11,5 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:index,:show, :edit, :update]
 end
