@@ -1,6 +1,7 @@
 
 
-<div class= "container">
+
+<div class= "container px-5 px-sm-0">
   <div class= "row">
     <div class= "col-md-3">
 
@@ -25,7 +26,7 @@
 
 
   <div class = "row">
-    <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary btn-block edit_user_48773" do %>
+    <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block edit_user_48773" do %>
     <i class="fas fa-user-cog"></i>
     <% end %>
 </div>
@@ -36,9 +37,6 @@
 
 <h1>New book</h1>
 
-<div>
-  <%= flash[:notice] %>
-</div>
 
 <% if @user.errors.any? %>
   <%= @user.errors.count %>件のエラーが発生しました
@@ -60,7 +58,7 @@
 
 
 
-<div class= "col-md-8">
+<div class= "col-md-8 offset-md-1">
 
 <h1>Books</h1>
 
@@ -79,7 +77,7 @@
 
     <% @books.each do |book| %>
     <tr>
-      <td><%= link_to book_path(book.id) do %>
+      <td><%= link_to user_path(@user.id) do %>
     <%= image_tag book.user.get_profile_image(100, 100) %>
   <% end %>
       </td>

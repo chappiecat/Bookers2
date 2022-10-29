@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :correct_user, only: [:edit, :update]
+
   def new
      @user = User.new
   end
@@ -20,7 +23,7 @@ class UsersController < ApplicationController
     user_id = params[:id].to_i
   login_user_id = current_user.id
   if(user_id != login_user_id)
-    redirect_to books_path
+    redirect_to user_path(current_user.id)
      @user = User.find(params[:id])
   end
   end
@@ -29,14 +32,15 @@ class UsersController < ApplicationController
     @user = Users.new(user_params)
     if @luser.save
       redirect_to user_path(@user.id)
-       flash[:notice] = "投稿が成功しました"
+       flash[:notice] = "投稿が成功しましたsuccessfully"
     redirect_to user_path(user.id)
     else
       render :new
     end
   end
 
- def destroy
+
+  def destroy
    user = User.find(params[:id])
     user.destroy
     redirect_to '/users'
@@ -44,15 +48,16 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-  @user.update(user_params)
+    if @user.update(user_params)
+  flash[:notice] = "successfully"
   redirect_to user_path(@user.id)
-    user_id = params[:id].to_i
-  login_user_id = current_user.id
-  if(user_id != login_user_id)
-    redirect_to books_path
+    else
+      render :edit
+    end
+  end
 
-  end
-  end
+
+
 
 
   private
@@ -65,7 +70,13 @@ class UsersController < ApplicationController
       user_id = params[:id].to_i
       login_user_id = current_user.id
       if(user_id != login_user_id)
-        redirect_to books_path
+                redirect_to books_path
       end
+  end
+
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(user_path(current_user)) unless @user == current_user
   end
 end

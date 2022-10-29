@@ -1,15 +1,21 @@
 
 
-<body>
 
-<div class= "container">
+
+
+
+<div class= "container px-5 px-sm-0">
   <div class= "row">
     <div class= "col-md-3">
 
+<div>
+  <%= flash[:notice] %>
+</div>
+
+
   <h1>User info</h1>
   <div>
-
-    <%= image_tag @user.get_profile_image(100,100) %>
+     <%= image_tag @user.get_profile_image(100,100) %>
   </div>
 
   <table class="table">
@@ -26,7 +32,7 @@
   </table>
 
   <div class = "row">
-    <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary btn-block edit_user_48773" do %>
+    <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary btn-block edit_user" do %>
     <i class="fas fa-user-cog"></i>
     <% end %>
 </div>
@@ -60,7 +66,7 @@
 
 
 
-<div class= "col-md-8">
+<div class= "col-md-8 offset-md-1">
 
 <h1>Users</h1>
 
@@ -78,9 +84,9 @@
 
     <% @users.each do |user| %>
     <tr>
-      <td><%= link_to user_path(user.id) do %>
+      <td>
     <%= image_tag user.get_profile_image(100, 100) %>
-  <% end %>
+
       </td>
 
       <td>
@@ -97,4 +103,3 @@
 
 </table>
 </div>
-  </body>

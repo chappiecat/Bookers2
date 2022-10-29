@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'posts/index'
   devise_for :users
 
-  get "homes/about" => "homes#about", as: "about"
+  get "home/about" => "homes#about", as: "about"
  resources :books do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]

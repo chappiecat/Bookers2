@@ -7,8 +7,25 @@
       </div>
       </div>
 
+      <% @user.errors.full_messages.each do |message| %>
+  <div class="form-error">
+     <%= message %>
+  </div>
+<% end %>
 
 <h1>User info</h1>
+
+<% if @user.errors.any? %>
+  <h3>
+  <%= @user.errors.count %>
+  error prohibited this obj from being saved:</h3>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 
 <from enctype="multipart/from-data" action="/users"
 accept-charset="UTF-8" method="post">
