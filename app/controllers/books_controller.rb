@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  
+
  before_action :correct_user, only: [:edit, :update]
 
   def index
@@ -13,6 +13,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user
     @booknew = Book.new
+     @book_comment = BookComment.new
   end
 
   def edit

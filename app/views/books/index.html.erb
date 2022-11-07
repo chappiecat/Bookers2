@@ -63,16 +63,9 @@
   <% end %>
 
 
-<%= form_with model: @book do |f| %>
-  <label for="inputTitle">Title</label><br>
-  <%= f.text_field :title, autofocus: true, id:"inputTitle", placeholder:"Title"%><br>
 
 
-  <label for="inputOpinion">Opinion</label><br>
-  <%= f.text_field :body, autofocus: true, id:"inputOpinion", placeholder:"Opinion"%><br>
 
-  <%= f.submit 'Create Book',class: "btn btn-success" %>
-<% end %>
 </div>
 
 
@@ -92,6 +85,8 @@
     </tr>
     </thead>
 
+
+
   <tbody>
 
     <% @books.each do |book| %>
@@ -108,7 +103,33 @@
       </td>
 
       <td><%= book.body %></td>
+
+
+      <td>
+        <% if book.favorited_by?(current_user) %>
+    <p>
+      <%= link_to book_favorites_path(book), method: :delete do %>
+        ♥<%= book.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to book_favorites_path(book), method: :post do %>
+        ♡<%= book.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+      </td>
+
+      <td>
+        コメント数：
+  <%= book.book_comments.count %>
+
+      </td>
+
     </tr>
+
+
 <% end %>
 
   </tbody>
